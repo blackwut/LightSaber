@@ -111,6 +111,25 @@ target_link_libraries(cluster_monitoring
 target_compile_options(cluster_monitoring PRIVATE -Wall -Wextra -O3 -march=native)
 
 
+# Cluster Monitoring Lite
+add_executable(cluster_monitoring_lite
+        ClusterMonitoringLite/main.cpp
+        ${CPP_FILES} ${RDMA_CPP_FILES}
+        )
+target_link_options(cluster_monitoring_lite PRIVATE -Wl,--unresolved-symbols=ignore-all)
+if (Boost_FOUND)
+    include_directories(${Boost_INCLUDE_DIRS})
+    target_link_libraries(cluster_monitoring_lite ${Boost_LIBRARIES})
+endif ()
+target_link_libraries(cluster_monitoring_lite
+        z
+        boost_iostreams
+        boost_fiber
+        operatorJITLib
+        tbb ibverbs
+        pthread dl uuid stdc++fs)
+target_compile_options(cluster_monitoring_lite PRIVATE -Wall -Wextra -O3 -march=native)
+
 # Linear Road Benchmark
 add_executable(linear_road_benchmark
         LinearRoadBenchmark/main.cpp

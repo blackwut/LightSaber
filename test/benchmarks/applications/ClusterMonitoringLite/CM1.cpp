@@ -7,6 +7,14 @@
 #include "utils/Query.h"
 #include "benchmarks/applications/ClusterMonitoring/ClusterMonitoring.h"
 
+
+/*
+  SELECT *
+  FROM SCHEMA
+  GROUP BY category
+  WINDOW RANGE 60s EVERY 1s SUM(cpu)
+*/
+
 class CM1 : public ClusterMonitoring {
  private:
   void createApplication() override {
@@ -21,12 +29,12 @@ class CM1 : public ClusterMonitoring {
     aggregationTypes[0] = AggregationTypes::fromString("sum");
 
     std::vector<ColumnReference *> aggregationAttributes(1);
-    aggregationAttributes[0] = new ColumnReference(8, BasicType::Float);
+    aggregationAttributes[0] = new ColumnReference(8, BasicType::Float); // cpu
 
     std::vector<Expression *> groupByAttributes(1);
-    groupByAttributes[0] = new ColumnReference(6, BasicType::Integer);
+    groupByAttributes[0] = new ColumnReference(6, BasicType::Integer);  // category
 
-    auto window = new WindowDefinition(RANGE_BASED, 60, 1); // (RANGE_BASED, 60*25, 1*25)
+    auto window = new WindowDefinition(RANGE_BASED, 60, 1);
     Aggregation *aggregation = new Aggregation(*window, aggregationTypes, aggregationAttributes, groupByAttributes);
 
     bool replayTimestamps = window->isRangeBased();
@@ -38,6 +46,11 @@ class CM1 : public ClusterMonitoring {
     genCode->setQueryId(0);
     genCode->setup();
     OperatorCode *cpuCode = genCode;
+
+    TupleSchema *schema_ = &(((OperatorKernel *) _cpuCode)->getOutputSchema());
+    std::cout << "\n \n \n \n \n \n Ü";
+    std::cout << schema_->getSchema();
+    std::cout << "\n \n \n \n \n \n";
 
     // Print operator
     std::cout << cpuCode->toSExpr() << std::endl;

@@ -94,17 +94,6 @@ class ClusterMonitoring : public BenchmarkQuery {
       }
     }
 
-    /*for (unsigned long i = 0; i < m_data->size() / sizeof(InputSchema); ++i) {
-      if (i%10==0) {
-        auto cpu = buf[i].cpu;
-        auto ii = 0;
-        for (;ii < 10 && i < m_data->size() / sizeof(InputSchema); ++i) {
-          buf[i].cpu = cpu;
-          ii++;
-        }
-      }
-    }*/
-
     if (m_debug) {
       std::cout << "timestamp jobId machineId eventType userId category priority cpu" << std::endl;
       for (unsigned long i = 0; i < m_data->size() / sizeof(InputSchema); ++i) {
@@ -145,7 +134,7 @@ class ClusterMonitoring : public BenchmarkQuery {
   }
 
   void createSchema() {
-    m_schema = new TupleSchema(12, "ClusterMonitoring");
+    m_schema = new TupleSchema(9, "ClusterMonitoring");
     auto longAttr = AttributeType(BasicType::Long);
     auto intAttr = AttributeType(BasicType::Integer);
     auto floatAttr = AttributeType(BasicType::Float);

@@ -48,9 +48,9 @@ class CM1 : public ClusterMonitoring {
     OperatorCode *cpuCode = genCode;
 
     TupleSchema *schema_ = &(((OperatorKernel *) cpuCode)->getOutputSchema());
-    std::cout << "\n \n \n \n \n \n";
+    std::cout << "\n \n";
     std::cout << schema_->getSchema();
-    std::cout << "\n \n \n \n \n \n";
+    std::cout << "\n \n";
 
     // Print operator
     std::cout << cpuCode->toSExpr() << std::endl;

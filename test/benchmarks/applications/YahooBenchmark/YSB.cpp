@@ -208,6 +208,11 @@ class YSB : public YahooBenchmark {
     // Print operator
     std::cout << cpuCode->toSExpr() << std::endl;
 
+    TupleSchema *schema_ = &(((OperatorKernel *) cpuCode)->getOutputSchema());
+    std::cout << "\n \n";
+    std::cout << schema_->getSchema();
+    std::cout << "\n \n";
+
     auto queryOperator = new QueryOperator(*cpuCode);
     std::vector<QueryOperator *> operators;
     operators.push_back(queryOperator);

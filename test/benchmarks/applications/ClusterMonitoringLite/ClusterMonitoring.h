@@ -148,5 +148,15 @@ class ClusterMonitoring : public BenchmarkQuery {
     m_schema->setAttributeType(6, intAttr);   /*    category:   int */
     m_schema->setAttributeType(7, intAttr);   /*    priority:   int */
     m_schema->setAttributeType(8, floatAttr); /*         cpu: float */
+
+    m_schema->setAttributeName(0, "timestamp");
+    m_schema->setAttributeName(1, "jobId");
+    m_schema->setAttributeName(2, "taskId");
+    m_schema->setAttributeName(3, "machineId");
+    m_schema->setAttributeName(4, "eventType");
+    m_schema->setAttributeName(5, "userId");
+    m_schema->setAttributeName(6, "category");
+    m_schema->setAttributeName(7, "priority");
+    m_schema->setAttributeName(8, "cpu");
   }
 };

@@ -151,8 +151,8 @@ class AttributeType : public AbstractType {
 
   std::string toSExpr() const override {
     std::stringstream o;
-    //			o << "("
-    //				<< "BasicType " << getBitWidth() << ")";
+    			o << "("
+    				<< "BasicType " << getBitWidth() << ")";
     return o.str();
   }
 

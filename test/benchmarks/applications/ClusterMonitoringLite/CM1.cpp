@@ -48,7 +48,7 @@ class CM1 : public ClusterMonitoring {
     OperatorCode *cpuCode = genCode;
 
     TupleSchema *schema_ = &(((OperatorKernel *) cpuCode)->getOutputSchema());
-    std::cout << "\n \nSchema:\n";
+    std::cout << "\n \nOutput Schema:\n";
     std::cout << schema_->getSchema();
     std::cout << "\n \n";
 
@@ -81,6 +81,11 @@ class CM1 : public ClusterMonitoring {
   CM1(bool inMemory = true, bool startApp = true) {
     m_name = "CM1";
     createSchema();
+
+    std::cout << "\n \nOutput Schema:\n";
+    std::cout << this->m_schema->getSchema();
+    std::cout << "\n \n";
+
     if (startApp)
       createApplication();
     if (inMemory)

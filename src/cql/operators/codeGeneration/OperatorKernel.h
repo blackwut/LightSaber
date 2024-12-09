@@ -89,7 +89,7 @@ class OperatorKernel : public OperatorCode, public AggregateOperatorCode {
 
   QueryConfig *m_config = nullptr;
 
-  const bool m_debug = true;
+  const bool m_debug = false;
 
  public:
   OperatorKernel(bool genCode = true, bool usePtrs = true, bool useParallelMerge = false, bool generateFile = true) :
